@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PL3</title>
+
+    <!-- Adiciona o ícone (favicon) na aba do navegador -->
+    <link rel="icon" href="https://i.ibb.co/B1nCYy5/RECUPERA-O-DE-IMPOSTOS-NA-CONSULTORIA-8.png" type="image/png">
+    
+   
+   
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    
+    <style>
+        /* ======================================================= */
+        /* 0. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS */
+        /* ======================================================= */
+        :root {
+            --color-dark-blue: hwb(203 4% 82%);         /* Azul Marinho Principal */
+            --color-white: #ffffff;
+            --color-light-gray: #d1d9e0;        /* Cor do texto de corpo */
+            --color-highlight: oklab(53.061% 0.00842 0.05273 / 0.897);         /* Dourado/Bege */
+            --color-background-light: #f7f7f7; 
+            /* Fonte principal: Anton para títulos, MONTSERRAT para corpo */
+            --font-size-process-list: 1.2em;    /* Tamanho da fonte da lista de diagnóstico */
+            --font-family-title: 'Anton', MONTSERRAT;
+            --font-family-primary: MONTSERRAT, arial
+        }
+
+        /* Reset Básico */
+        body {
+            font-family: var(--font-family-primary);
+            margin: 0,;
+            padding: 0;
+            background-color: var(--color-background-light);
+            color: #dbd4d4;
+        }
+
+        /* ======================================================= */
+        /* 1. COMPONENTES E CLASSES UTILITÁRIAS */
+        /* ======================================================= */
+        .section {
+            padding: 80px 20px;
+        }
+
+        /* Modificador para seções de fundo escuro */
+        .section--dark {
+            background-color: var(--color-dark-blue);
+            color: var(--color-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Estilo comum para botões CTA */
+        .btn-cta {
+            background-color: var(--color-white);
+            color: var(--color-dark-blue);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn-cta:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* ====================================================== */
+        /* 3. HERO SECTION */
+        /* ======================================================= */
+        /*
+        NOTA: A imagem de fundo é aplicada com um gradiente de cor por cima
+        para criar o efeito de opacidade sem afetar o texto.
+        O 'rgba(10, 27, 46, 0.85)' representa a cor de fundo (--color-dark-blue)
+        com 85% de opacidade. Você pode ajustar o último valor (0.85) para
+        deixar a imagem mais ou menos visível.
+        */
+        .hero {
+            /* Substitua 'https://i.ibb.co/0yQKtzww/Em-nossa-linha-de-conduta-n-o-existe-nenhuma-contesta-o-de-ordem-jur-dica-e-nosso-objetivo-identific.png' pela URL da sua imagem */
+            background: linear-gradient(rgba(10, 27, 46, 0.5), rgba(10, 27, 46, 0.5)), url('https://i.ibb.co/kdZJy3W/Em-nossa-linha-de-conduta-n-o-existe-nenhuma-contesta-o-de-ordem-jur-dica-e-nosso-objetivo-identific.png');
+            background-size: cover; /* Faz a imagem cobrir toda a seção */
+            background-position: center; /* Centraliza a imagem */
+            color: var(--color-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            padding: 100px 20px; /* Ajusta o espaçamento vertical */
+            position: relative; /* Necessário para o empilhamento de camadas de fundo */
+        }
+
+        .hero__content {
+            max-width: 580px; /* Encurta a largura para compactar as linhas */
+            max-width: 900px; /* Ajusta a largura para o texto caber em 3 linhas */
+            padding: 0 20px;
+        }
+
+        .hero__title {
+            font-family: var(--font-family-primary); /* Alterado para Arial/Montserrat */
+            font-size: 44px;
+            line-height: 1.3;
+            font-weight: bold;
+            margin-bottom: 29px;
+            /* text-transform: uppercase; */ /* Removido para manter a caixa original */
+            letter-spacing: 0;
+        }
+
+        .hero__text {
+            font-family: 'Arial', var(--font-family-primary); /* Define Arial como fonte principal */
+            font-size: 16px; /* Tamanho de fonte ajustado para 16px */
+            line-height: 1.6;
+            color: var(--color-light-gray);
+            margin-bottom: 30px;
+        }
+
+        /* ======================================================= */
+        /* 4. BENEFITS SECTION (BENEFÍCIOS) */
+        /* ======================================================= */
+        .benefits .container {
+            text-align: center;
+        }
+
+        .benefits__title {
+            font-family: var(--font-family-title);
+            font-size: 2.5em;
+            font-weight: 400;
+            color: var(--color-highlight);
+            margin-bottom: 50px;
+        }
+
+        .benefits__cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: var(--color-dark-blue);
+            color: var(--color-white);
+            padding: 30px;
+            flex: 1 1 23%;
+            min-width: 250px;
+            box-sizing: border-box;
+            text-align: left;
+            text-align: center;
+        }
+
+        .card__title {
+            font-family: var(--font-family-title);
+            font-size: 1.2em;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .card__text {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: var(--color-light-gray);
+        }
+
+        /* ======================================================= */
+        /* 5. PROCESS SECTION (DIAGNÓSTICO) */
+        /* ======================================================= */
+        .process {
+            background-color: var(--color-dark-blue);
+            color: var(--color-white);
+        }
+
+        .process__wrapper {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            justify-content: center;
+        }
+
+        .process__text-content {
+            flex: 2;
+            /* padding: 20px 0; */ /* Removido para melhor alinhamento */
+        }
+
+        .process__logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .process__logo-img {
+            max-width: 250px;
+            height: auto;
+            display: block;
+        }
+
+        .process__title {
+            font-family: var(--font-family-title);
+            font-size: 1.8em; /* Aumentado para 8.0em */
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .process__list {
+            list-style: none;
+            padding-left: 0;
+            font-size: var(--font-size-process-list); /* Controlado pela variável */
+            line-height: 1.8;
+        }
+
+        .process__list li {
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        .process__list li::before {
+            content: '•';
+            color: var(--color-white);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .process__obs {
+            margin-top: 30px;
+            font-size: 1.0em;
+            color: var(--color-light-gray);
+            text-align: left;
+            /* padding-left: 1.5em; */ /* Removido para alinhar à esquerda */
+        }
+
+        /* ======================================================= */
+        /* 5. STATISTICS SECTION */
+        /* 6. STATISTICS SECTION */
+        /* ======================================================= */
+        .stats {
+            background-color: var(--color-highlight);
+            padding: 80px 20px;
+        }
+
+        .stats .container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch; /* Garante que todos os itens tenham a mesma altura */
+            flex-wrap: wrap;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stats__item {
+            flex: 1 1 250px;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centraliza o conteúdo verticalmente dentro do item */
+            max-width: 280px;
+        }
+
+        .stats__number {
+            font-family: var(--font-family-primary); /* Alterado para Arial/Montserrat */
+            color: var(--color-white);
+            margin: 0 0 5px 0;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
+        .stats__number {
+            font-size: 40px; /* Alterado para 40px */
+        }
+
+        .stats__description {
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 5px;
+            color: var(--color-white);
+            text-transform: uppercase;
+        }
+
+        /* ======================================================= */
+        /* 7. FINAL CTA SECTION */
+        /* ======================================================= */
+        .final-cta {
+            background-color: var(--color-dark-blue);
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        .final-cta__title {
+            font-family: var(--font-family-title);
+            font-size: 2.8em;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .final-cta__text {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        /* ======================================================= */
+        /* 8. FOOTER */
+        /* ======================================================= */
+        .footer {
+            background-color: var(--color-dark-blue);
+            color: var(--color-light-gray);
+            padding: 40px 20px;
+            font-size: 0.9em;
+        }
+
+        .footer__grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .footer__column {
+            flex: 1 1 200px;
+        }
+
+        .footer__column h5 {
+            color: var(--color-white);
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .footer__column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer__column a, .footer__column li {
+            color: var(--color-light-gray);
+            text-decoration: none;
+            line-height: 1.8;
+            display: block;
+        }
+
+        .footer__column a:hover {
+            color: var(--color-highlight);
+        }
+
+        .footer__copyright {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        /* ======================================================= */
+        /* 9. RESPONSIVIDADE */
+        /* ======================================================= */
+        @media (max-width: 1100px) {
+            .card {
+                flex: 1 1 45%; 
+            }
+        }
+
+        @media (max-width: 800px) {
+            .hero__title {
+                font-size: 2.5em;
+            }
+
+            .process__wrapper {
+                flex-direction: column;
+            }
+
+            .process__logo-container {
+                border-left: none;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .stats .container {
+                flex-direction: column; 
+                align-items: center;
+            }
+
+            .stats__item {
+                margin-bottom: 30px;
+            }
+            .stat-number-large {
+                font-size: 3.5em; 
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 20px;
+            }
+
+            .header__nav ul {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .benefits__cards {
+                flex-direction: column;
+            }
+            .card {
+                min-width: unset;
+                flex: 1 1 100%;
+            }
+        }
+
+        /* CSS RESPONSIVO ADICIONAL */
+
+        /* Tablet */
+        @media (max-width: 1023px) {
+            body {
+                font-size: 16px; /* Ajusta tamanho da fonte para melhor legibilidade */
+            }
+            .hero {
+                padding: 80px 20px; /* Reduz padding para telas menores */
+            }
+            .card {
+                width: 80%; /* Cards ocupam mais espaço em telas menores */
+                margin: 0 auto;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 767px) {
+            .hero h1 {
+                font-size: 2.5rem; /* Reduz tamanho do título para caber */
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            /* .navbar {
+                flex-direction: column; 
+                align-items: center;
+            } */
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block; /* Remove espaços indesejados */
+                margin: 0 auto; /* Centraliza */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero section section--dark">
+        <div class="container hero__content">
+            <h1 class="hero__title">
+                Recupere tributos pagos a maior.<br>
+                Sem custo inicial e com resultado<br>em até 10 dias úteis
+            </h1>
+            <p class="hero__text">
+                Trabalhos realizados por ex-auditores da Receita Federal do Brasil (aposentados), que fazem parte do time da PL3, também realizamos auditorias contábil-tributárias precisas, ágeis e sem riscos para sua empresa.
+            </p>
+            <a href="https://api.whatsapp.com/send?phone=5581971065000&text=Ol%C3%A1!%20%0AEu%20gostaria%20de%20solicitar%20o%20diagn%C3%B3stico%20gratuito." class="btn-cta">
+                Solicite o diagnóstico gratuito aqui
+            </a>
+        </div>
+    </section>
+
+    <section class="benefits section">
+        <div class="container">
+            <h2 class="benefits__title">Por quê mais de 717 empresas já confiam na PL3?</h2>
+            <div class="benefits__cards">
+
+                <div class="card">
+                    <h3 class="card__title">Equipe Especializada</h3>
+                    <p class="card__text">Contamos com profissionais altamente qualificados, incluindo ex-auditores (aposentados) da Receita Federal, que conhecem os bastidores do Fisco e dominam todas as os detalhes legais para maximizar sua recuperação tributária com total segurança.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card__title">Agilidade Extrema</h3>
+                    <p class="card__text">Enquanto o mercado leva meses para entregar uma revisão, nós oferecemos o resultado final da auditoria revisional contábil em até 10 dias úteis — garantindo rapidez na tomada de decisão e na recuperação dos seus valores. Estando todas as documentações solicitadas entregues.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card__title">Sem Custo Inicial até Dezembro/2025</h3>
+                    <p class="card__text">Nosso trabalho não tem nenhum custo financeiro inicial. Você só tem a ganhar: se não houver valores a recuperar, sua empresa terá recebido uma auditoria contábil e fiscal completa, dos impostos federais, sem pagar nada por isso.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="card__title">Prova Real</h3>
+                    <p class="card__text">A PL3 já recuperou mais de R$77 milhões para empresas de diversos setores — sempre com ética, precisão técnica e foco em gerar caixa para o seu negócio. Nossa reputação é construída com base em números reais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="process section section--dark">
+        <div class="container process__wrapper">
+            <div class="process__text-content">
+                <h2 class="process__title">Como funciona o diagnóstico?</h2>
+                <ul class="process__list">
+                    <li>Coleta dos documentos contábeis.</li>
+                    <li>Análise com equipe técnica especializada.</li>
+                    <li>Entrega do relatório de auditoria revisional em até 10 dias úteis.</li>
+                    <li>Plano de ação para recuperação dos valores.</li>
+                </ul>
+                <div class="process__obs">
+                    <p>Obs: Todos os documentos solicitados, são eletrônicos.</p> 
+                    <p> Tudo muito rápido, gratuito e com retorno real.</p>
+                </div>
+            </div>
+
+            <div class="process__logo-container">
+            
+                    <img 
+                    src="https://i.ibb.co/q39ZZXpG/RECUPERA-O-DE-IMPOSTOS-NA-CONSULTORIA-9.png"
+                    alt="Logo PL3 Consultoria Tributária" 
+                    class="process__logo-img"
+              >
+            </div>
+        </div>
+    </section>
+
+    <section class="stats section">
+        <div class="container">
+            
+            <div class="stats__item">
+                <div class="stats__number">+717</div>
+                <div class="stats__description">Trabalhos realizados</div>
+            </div>
+
+            <div class="stats__item">
+                <div class="stats__number">+577</div>
+                <div class="stats__description">Clientes satisfeitos</div>
+            </div>
+
+            <div class="stats__item">
+                <div class="stats__number">R$77 Milhões</div>
+                <div class="stats__description">Em tributos recuperados</div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="final-cta section section--dark">
+        <div class="container">
+            <h2 class="final-cta__title">Quer saber se sua empresa<br />
+                está pagando tributos a mais que o devido?</h2>
+            <p class="final-cta__text">
+                Solicite agora um diagnóstico gratuito e descubra o quanto você pode recuperar.
+            </p>
+            <a href="https://api.whatsapp.com/send?phone=5581971065000&text=Ol%C3%A1!%20%0AEu%20gostaria%20de%20solicitar%20o%20diagn%C3%B3stico%20gratuito." class="btn-cta">
+                Solicitar diagnóstico gratuito
+            </a>
+        </div>
+    </section>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-column">
+            <h3>Contato</h3>
+            <ul>
+                <li>(81) 97106-5000</li>
+                <li><a href="mailto:contato@pl3.com.br">contato@pl3.com.br</a></li>
+                <li><a href="https://instagram.com/pl3consultoria" target="_blank">@pl3consultoria</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Políticas</h3>
+            <ul>
+                <li><a href="#">Políticas de Privacidade</a></li>
+                <li><a href="#">Termo de Uso</a></li>
+            </ul>
+        </div>
+
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background: #ffffff; /* cor escura semelhante à da imagem */
+        padding: 40px 20px;
+        color: rgb(11, 8, 36);
+        font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 120px; /* Aumenta o espaço entre as colunas */
+    }
+
+    .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+    .footer-column {
+        text-align: center;
+    }
+
+    .footer-column ul {
+        list-style-type: none; /* Remove os marcadores da lista */
+        padding-left: 0; /* Remove o recuo da lista */
+    }
+
+    .footer-column ul li {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .footer-column a {
+        color: rgb(11, 8, 36);
+        text-decoration: underline;
+    }
+
+    .footer-column a:hover {
+        opacity: 0.8;
+    }
+
+    /* Responsivo */
+    @media (max-width: 600px) {
+        .footer-container {
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+</style>
+
+
+</body>
+</html>
